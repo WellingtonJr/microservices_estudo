@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AuthuserApplication<authuser>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ead.authuser.AuthuserApplication",
+            "projectName": "authuser",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
