@@ -43,7 +43,7 @@ public class UserModel implements Serializable {
     private String password;
 
     @Column(nullable = false, length = 150)
-    private String fullname;
+    private String fullName;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
