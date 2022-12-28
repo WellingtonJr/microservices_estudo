@@ -29,3 +29,10 @@
      -  Utilizar @JsonView em cada atributo especificando qual a visão(UserView) 
      - Anotar com @JsonView nos metodos dos controllers q irão receber o objeto User do client para cadastro e update do objeto.
 - Utilizar a biblioteca SpringValidation(no pom) para validar campos de UserDTO
+- Utilizamos uma anotacao customizada @UsernameConstraint para efetuar uma validação que podemos customizar de acordo com o que o sistema irá pedir, para isso:
+    - Anotar username como @UsernameConstrain e passar o group de visão (UserView)
+    - Criar pacote validation
+    - Dentro do pacote validation, criar a @interface UsernameConstraint com as determinadas anotações de classe
+    - Definir atributos default: message, groups e payload
+    - Criar classe UsernameConstraintImpl, que irá implementar ConstraintValidator<UsernameConstraint, String>
+    - Em UsernameConstraintImpl, implementar metodos default e desenvolver a regra de negocio no método isValid, retornando false se nao for validado.

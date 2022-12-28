@@ -4,6 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.ead.authuser.validation.UsernameConstraint;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -29,7 +30,8 @@ public class UserDto {
 
     // não aceita valores NULOS e nem VAZIOS
     @NotBlank(groups = UserView.RegistrationPost.class)
-    @Size(min = 4, max = 50) // define min e max de caracteres
+    @Size(min = 4, max = 50, groups = UserView.RegistrationPost.class) // define min e max de caracteres
+    @UsernameConstraint(groups = UserView.RegistrationPost.class)
     @JsonView(UserView.RegistrationPost.class)
     private String username;
 
