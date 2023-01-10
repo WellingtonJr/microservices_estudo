@@ -34,5 +34,14 @@
     - Criar pacote validation
     - Dentro do pacote validation, criar a @interface UsernameConstraint com as determinadas anotações de classe
     - Definir atributos default: message, groups e payload
-    - Criar classe UsernameConstraintImpl, que irá implementar ConstraintValidator<UsernameConstraint, String>
+    - Criar classe UsernameConstraintImpl, que irá implementar ConstraintValidator< UsernameConstraint, String >
     - Em UsernameConstraintImpl, implementar metodos default e desenvolver a regra de negocio no método isValid, retornando false se nao for validado.
+- Implementação de retorno com paginação utlizando Spring Data:
+    - Em UserController mudar retorno para o time ResponseEntity< Page < UserModel > >
+    - Receber um Pageable (da biblioteca .data.domain) como parametro
+    - Anotar o Pageable como @PageableDefault e passar as definições da paginação entre parenteses
+    - Criar nova funcao findAll em UserService, só que agora recebendo um Pageable como parametro
+    - Implementar funcao findAll em UserServiceImpl, utlizando a funcao nativa de JPA que irá realizar um findAll porém recebendo um Pageable como parametro
+    - Dentro de getAllUsers em UserController, inicializar um objeto Page que irá receber o retorno desse novo findAll de UserService
+    - Dentro do body, retornar o objeto Page
+    - Obs: Para mudar os paramentros da paginação, basta que sejam modificados via Params na própria requisição
