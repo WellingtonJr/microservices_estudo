@@ -45,3 +45,14 @@
     - Dentro de getAllUsers em UserController, inicializar um objeto Page que irá receber o retorno desse novo findAll de UserService
     - Dentro do body, retornar o objeto Page
     - Obs: Para mudar os paramentros da paginação, basta que sejam modificados via Params na própria requisição
+- Implementação de filtros avancados com specification:
+    - Importar biblioteca specification-arg-resolver do mvnrepository.com para o pom.xml. Essa biblioteca converte os dados dos parametros para tipos basicos Java(Enums, Double, Date, etc...)
+    - Criar uma classe de configuração ResolverConfig e anota-la como @Configuration. A classe extende WebMvcConfigurationSupport
+    - Dentro da classe ResolverConfig , utilizamos o metodo addArgumentsResolvers que recebe como parametro uma Lista de HandlerMethodArgumentResolver.
+    - Dentro desse metodo, adicionamos os Specifications dentro da lista de argumentResolvers. Adicionamos um new SpecificationArgumentResolver() e um new PageableHandlerMethodArgumentResolver. Feito isso, damos um super.addArgumentResolvers passando argumentResolvers como argumento. E assim está feita a configuração do WebMvc e do ResolverConfig.
+    - Criar classe para definitir filtros de specifications. Neste caso o nome sera SpecificationTemplate.
+    - Dentro da classe SpecificationTemplate definimos uma interface que se chamará UserSpec e extenderá Specification do data.jpa e passamos < UserModel > como argumento.
+    - Anotamos a interface com @Spec para especificar o tipo de filtro que usaremos. Ex: @Spec(path = "userType", spec = Equal.class). Podemos utilizar varios @Spec , para isso basta anotarmos o grupo de @Spec com @And.
+    - Feito isso, voltamos ao UserController e passamos SpecificationTemplate.userspec como parametro do end point getAllUsers.
+    - Modificar o findAll de UserService e UserServiceImpl para receber como parametro um Specitification< UserModel >
+    - Em UserRepository apenas iremos extender, além do jparepository, a biblioteca JpaSpecificationExecutor < UserModel >.
