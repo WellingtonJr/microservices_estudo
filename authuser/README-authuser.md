@@ -56,3 +56,9 @@
     - Feito isso, voltamos ao UserController e passamos SpecificationTemplate.userspec como parametro do end point getAllUsers.
     - Modificar o findAll de UserService e UserServiceImpl para receber como parametro um Specitification< UserModel >
     - Em UserRepository apenas iremos extender, além do jparepository, a biblioteca JpaSpecificationExecutor < UserModel >.
+- Adicionando Hateos na api:
+    - Importar o Spring Hateos no pom.xml
+    - Na classe UserModel extender a classe RepresentationModel < UserModel > para criar os links para esse recurso.
+    - Em getAllUsers verificar se a page de UserModel esta vazia, se nao estiver, utilizar um for para passar pada cada um UserModel.
+    - Em casa objeto UserModel utilizar _user.add(linkTo(methodOn(UserController.class).getOneUser(user.getUserId())).withSelfRel());_
+    
